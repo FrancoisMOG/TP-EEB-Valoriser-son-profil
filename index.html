@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours : Valoriser son profil - Électricien du Bâtiment</title>
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --primary-color: #0f172a; /* Bleu nuit professionnel */
+            --accent-color: #f59e0b; /* Orange sécurité/chantier */
+            --secondary-color: #3b82f6; /* Bleu électrique */
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            font-size: 18px;
+        }
+
+        /* --- LAYOUT & STRUCTURE --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            min-height: 90vh;
+            padding: 4rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: var(--text-light);
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 5px;
+            background-color: var(--accent-color);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+        }
+
+        /* --- COMPONENTS --- */
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box {
+            background-color: #eff6ff;
+            border: 2px dashed var(--secondary-color);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .trainer-box {
+            background-color: #1e293b;
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+            border-left: 5px solid var(--accent-color);
+        }
+        
+        .trainer-box h3 { color: var(--accent-color); border: none; padding: 0; }
+        .trainer-box ul li { margin-bottom: 0.5rem; }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* --- NAVIGATION --- */
+        .nav-dots {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #cbd5e1;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot:hover, .nav-dot.active {
+            background-color: var(--accent-color);
+            transform: scale(1.4);
+        }
+
+        /* --- BUTTON IMPRIMER --- */
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 200;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .print-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* --- SPECIFIC SECTIONS --- */
+        
+        /* Hero */
+        .hero {
+            /* Image retirée pour respecter la consigne "aucun lien internet", remplacement par dégradé */
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.95)), #1e293b;
+            color: white;
+            text-align: center;
+            padding-top: 5rem;
+        }
+
+        .hero-meta { font-size: 1.5rem; color: var(--accent-color); font-weight: bold; margin-bottom: 1rem; text-transform: uppercase; }
+
+        /* Comparison Table style */
+        .comparison-container {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .comp-box {
+            flex: 1;
+            min-width: 300px;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .comp-bad {
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+        }
+
+        .comp-good {
+            background-color: #f0fdf4;
+            border: 2px solid #22c55e;
+        }
+
+        .comp-title { font-weight: bold; margin-bottom: 1rem; display: block; font-size: 1.2rem; }
+        .comp-text { font-style: italic; font-size: 1.1rem; }
+        
+        .comp-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 2rem;
+        }
+
+        /* Training Grids */
+        .competence-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .competence-col {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 5px solid var(--secondary-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            min-height: 200px;
+        }
+        .competence-col h4 { font-size: 1.2rem; margin-bottom: 1rem; color: var(--primary-color); }
+        .lines-spacer { font-size: 3rem; color: #e2e8f0; line-height: 1.2; letter-spacing: -10px; }
+
+        /* Pitch Steps */
+        .step-list {
+            list-style: none;
+            counter-reset: steps;
+            padding: 0;
+            max-width: 800px;
+        }
+        .step-list li {
+            position: relative;
+            padding-left: 4rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        .step-list li::before {
+            counter-increment: steps;
+            content: counter(steps);
+            position: absolute;
+            left: 0;
+            top: -5px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+        }
+
+        /* Quotes */
+        .quote-box {
+            font-size: 1.5rem;
+            font-style: italic;
+            text-align: center;
+            margin-top: 2rem;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            color: var(--primary-color);
+            background: #fff;
+        }
+
+        /* Exercise specific lists */
+        .reform-list li {
+            background: white;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid #cbd5e1;
+            border-radius: 0 4px 4px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .reform-list span { font-weight: bold; color: var(--accent-color); }
+
+        /* Icons SVG */
+        svg { width: 24px; height: 24px; fill: currentColor; }
+
+        /* --- PODCAST & PDF CONTAINER (Ajout Pro) --- */
+        .resource-container {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .audio-label {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 600px;
+            height: 40px;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .pdf-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #fff;
+            color: var(--primary-color);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+        }
+
+        .pdf-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .grid-3, .competence-grid { grid-template-columns: 1fr; }
+            .nav-dots { display: none; }
+            body { font-size: 16px; }
+            .pdf-btn { width: 100%; }
+        }
+
+        /* --- PRINT STYLES --- */
+        @media print {
+            @page { margin: 1cm; }
+            body { background: white; color: black; font-size: 12pt; line-height: 1.4; }
+            .print-btn, .nav-dots, .resource-container { display: none !important; }
+            section { page-break-inside: avoid; min-height: auto; padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; }
+            h1, h2 { color: black; border-bottom: 2px solid black; margin-top: 0;}
+            h1 { font-size: 24pt; margin-bottom: 1rem; }
+            h2 { font-size: 18pt; padding-bottom: 0.5rem; }
+            h3 { color: #444; font-size: 14pt; border: none; padding: 0; }
+            
+            .hero { background: none !important; color: black; border-bottom: 2px solid black; padding: 0; min-height: auto; margin-bottom: 2rem; }
+            .hero-meta { color: black; }
+            
+            .card, .comp-box, .competence-col, .highlight-box { box-shadow: none; border: 1px solid #ccc; background: white; padding: 1rem; page-break-inside: avoid; }
+            .comp-good { border: 2px solid black; background: #f9f9f9; }
+            
+            .quote-box { border: 1px solid #999; font-size: 12pt; padding: 1rem; }
+            .trainer-box { background: #eee; color: black; border: 2px solid black; }
+            .trainer-box h3 { color: black; }
+            
+            .step-list li { font-size: 11pt; }
+            svg { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bouton Imprimer / Télécharger PDF -->
+    <button class="print-btn" onclick="window.print()">
+        <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M19 8h-1V3H6v5H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zM8 5h8v3H8V5zm8 12v2H8v-2h8zm2-2v-2H6v2H4v-4c0-.55.45-1 1-1h14c.55 0 1 .45 1 1v4h-2z"/><circle cx="18" cy="11.5" r="1"/></svg>
+        Imprimer / PDF
+    </button>
+
+    <!-- Navigation Latérale -->
+    <nav class="nav-dots">
+        <a href="#intro" class="nav-dot active" title="Introduction"></a>
+        <a href="#pourquoi" class="nav-dot" title="Pourquoi se valoriser"></a>
+        <a href="#quoi" class="nav-dot" title="Quoi valoriser"></a>
+        <a href="#langage" class="nav-dot" title="Langage professionnel"></a>
+        <a href="#forces" class="nav-dot" title="Points forts"></a>
+        <a href="#pitch" class="nav-dot" title="Le Pitch"></a>
+        <a href="#adapte" class="nav-dot" title="Adapter au recruteur"></a>
+        <a href="#entrainement" class="nav-dot" title="Mise en pratique"></a>
+        <a href="#synthese" class="nav-dot" title="Synthèse"></a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header id="intro" class="section hero">
+        <div class="container">
+            <div class="hero-meta">Module Valorisation</div>
+            <h1>Valoriser son profil</h1>
+            <p class="subtitle">Transformer son parcours en atouts professionnels</p>
+            
+            <div class="highlight-box" style="background: rgba(255,255,255,0.1); border-color: white; color: white; backdrop-filter: blur(5px);">
+                <h3>Objectif général</h3>
+                <p style="font-size: 1.2rem; margin-bottom: 0;">
+                    Aider à transformer votre parcours, vos apprentissages et vos expériences en un profil lisible, crédible et attractif pour un employeur du bâtiment ou de l’électricité.
+                </p>
+            </div>
+
+            <div style="margin-top: 2rem; text-align: left; background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 8px;">
+                <h3 style="color:white; border:none; padding:0; margin-bottom: 1rem; font-size: 1.5rem;">À l’issue du module, vous serez capable de :</h3>
+                <ul class="check-list" style="color:white; list-style: none;">
+                    <li style="margin-bottom: 0.5rem;">✔ Identifier vos compétences techniques et comportementales.</li>
+                    <li style="margin-bottom: 0.5rem;">✔ Reformuler vos tâches en langage professionnel.</li>
+                    <li style="margin-bottom: 0.5rem;">✔ Préparer une présentation orale de 1 minute.</li>
+                    <li style="margin-bottom: 0.5rem;">✔ Adapter votre discours au type d’entreprise visé.</li>
+                    <li style="margin-bottom: 0.5rem;">✔ Mettre en avant des preuves concrètes de vos compétences.</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #cbd5e1; margin-bottom: 0;">Durée conseillée : 1h30 à 2h</p>
+            </div>
+
+            <!-- PODCAST & PDF -->
+            <div class="resource-container">
+                <div>
+                    <span class="audio-label">🎧 Podcast : Valoriser son profil</span>
+                    <!-- L'attribut autoplay tente de lancer le son automatiquement. -->
+                    <!-- L'attribut controls ajoute les boutons Play/Pause/Stop natifs. -->
+                    <audio controls autoplay>
+                        <!-- IMPORTANT : Le fichier audio doit se nommer "Valoriser son profil.m4a" -->
+                        <source src="Valoriser son profil.m4a" type="audio/mp4">
+                        Votre navigateur ne supporte pas l'élément audio.
+                    </audio>
+                </div>
+                <div>
+                    <!-- IMPORTANT : Le fichier PDF doit se nommer "Valoriser son profil.pdf" -->
+                    <a href="Valoriser son profil.pdf" class="pdf-btn" download>
+                        ⬇️ Télécharger le PDF : Valoriser son profil
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2.1 POURQUOI -->
+    <section id="pourquoi">
+        <div class="container">
+            <h2>1. Pourquoi valoriser son profil</h2>
+            
+            <p>Beaucoup de demandeurs d'emploi, surtout en reconversion, minimisent leurs compétences ou pensent ne pas être assez expérimentés. Il est essentiel de changer de perspective.</p>
+            
+            <div class="highlight-box">
+                <h3>Le point de vue du recruteur</h3>
+                <p style="margin-bottom: 0;">
+                    Le recruteur ne cherche pas un expert absolu, mais une personne <strong>fiable</strong>, <strong>opérationnelle</strong> et capable de <strong>progresser</strong>. Dans l'électricité, les compétences techniques comptent, mais la rigueur, la sécurité et l'attitude professionnelle sont tout aussi importantes.
+                </p>
+            </div>
+
+            <div class="card" style="border-left-color: var(--accent-color);">
+                <h3>Changer de regard sur soi-même</h3>
+                <p style="margin-bottom:0">Ne vous dévalorisez pas. Apprenez à parler de ce que vous savez faire et montrez que vous êtes prêt à vous intégrer dans une équipe.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.2 QUOI VALORISER -->
+    <section id="quoi" style="background-color: #fff;">
+        <div class="container">
+            <h2>2. Ce qu’il faut valoriser</h2>
+            <p>Pour construire votre profil, repérez trois grandes catégories d’éléments :</p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3 style="margin-top:0;">Compétences Techniques</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Le TP Électricien d’équipement du bâtiment prépare à :</p>
+                    <ul style="list-style-type: disc; padding-left: 1.2rem;">
+                        <li>La lecture de plans et de schémas.</li>
+                        <li>Le tirage de câbles.</li>
+                        <li>Le câblage et le raccordement.</li>
+                        <li>La pose d’appareillage.</li>
+                        <li>Les contrôles de base.</li>
+                        <li>Le respect des règles de sécurité.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-top:0;">Compétences Comportementales</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Qualités humaines indispensables :</p>
+                    <ul style="list-style-type: disc; padding-left: 1.2rem;">
+                        <li>La rigueur.</li>
+                        <li>La ponctualité.</li>
+                        <li>L’autonomie progressive.</li>
+                        <li>L’esprit d’équipe.</li>
+                        <li>La capacité à écouter les consignes.</li>
+                        <li>La capacité à apprendre.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-top:0;">Preuves Concrètes</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Éléments qui prouvent vos dires :</p>
+                    <ul style="list-style-type: disc; padding-left: 1.2rem;">
+                        <li>Attestations de stage.</li>
+                        <li>Certificats de formation.</li>
+                        <li>Habilitations électriques.</li>
+                        <li>Appréciations de tuteur.</li>
+                        <li>Travaux réalisés en formation.</li>
+                        <li>Permis B et SST.</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top: 2rem; text-align: center;">Le TP prépare à des interventions variées (logement, tertiaire, rénovation) : c'est un vrai atout en termes de polyvalence.</p>
+        </div>
+    </section>
+
+    <!-- 2.3 LANGAGE PRO -->
+    <section id="langage">
+        <div class="container">
+            <h2>3. Passer du geste technique au langage professionnel</h2>
+            <p>Savoir faire ne suffit pas, il faut aussi savoir l'expliquer. Beaucoup de candidats utilisent des phrases très simples qui ne valorisent pas leur expérience. L'objectif est de reformuler pour paraître plus crédible et professionnel.</p>
+
+            <div class="comparison-container">
+                <div class="comp-box comp-bad">
+                    <span class="comp-title">Langage courant (À éviter)</span>
+                    <p class="comp-text">“J’ai tiré des câbles.”</p>
+                    <p class="comp-text">“J’ai monté un tableau.”</p>
+                    <p class="comp-text">“J’ai posé des prises.”</p>
+                </div>
+
+                <div class="comp-arrow">➜</div>
+
+                <div class="comp-box comp-good">
+                    <span class="comp-title" style="color: #15803d;">Langage professionnel (À utiliser)</span>
+                    <p class="comp-text" style="font-style: normal;">“J’ai réalisé le cheminement et le tirage de conducteurs en respectant le plan d’implantation.”</p>
+                    <p class="comp-text" style="font-style: normal;">“J’ai câblé et raccordé un tableau électrique dans le strict respect des consignes de sécurité.”</p>
+                    <p class="comp-text" style="font-style: normal;">“J’ai installé et raccordé des appareillages électriques en appliquant les règles de conformité.”</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.4 POINTS FORTS -->
+    <section id="forces" style="background-color: #fff;">
+        <div class="container">
+            <h2>4. Identifier ses points forts</h2>
+            <p>Pour faire émerger des points forts concrets, posez-vous les bonnes questions :</p>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem;">
+                <div style="flex: 1; min-width: 300px;">
+                    <ul style="list-style-type: none;">
+                        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">👉 Qu’est-ce que je sais faire <strong>seul</strong> ?</li>
+                        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">👉 Qu’est-ce que je fais <strong>correctement</strong> et régulièrement ?</li>
+                        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">👉 Qu’est-ce que le formateur ou le tuteur a apprécié chez moi ?</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <ul style="list-style-type: none;">
+                        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">👉 Dans quelles situations ai-je été <strong>utile</strong> à l’équipe ?</li>
+                        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">👉 Quelles tâches puis-je expliquer <strong>simplement</strong> à un recruteur ?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="background: #fff7ed; border-color: var(--accent-color);">
+                <h3>Exemples de points forts utiles pour le marché :</h3>
+                <div class="tag-container">
+                    <span class="tag" style="background: var(--accent-color);">Je respecte les consignes</span>
+                    <span class="tag" style="background: var(--accent-color);">Je travaille proprement</span>
+                    <span class="tag" style="background: var(--accent-color);">Je suis attentif à la sécurité</span>
+                    <span class="tag" style="background: var(--accent-color);">Je comprends vite les instructions</span>
+                    <span class="tag" style="background: var(--accent-color);">Je sais m’adapter au chantier</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.5 LE PITCH -->
+    <section id="pitch">
+        <div class="container">
+            <h2>5. Préparer sa présentation orale</h2>
+            <p>Chaque participant doit être capable de se présenter en <strong>1 minute</strong>. Cette présentation est un exercice clé car elle prépare à l’entretien d’embauche.</p>
+
+            <ul class="step-list">
+                <li><strong>Qui je suis.</strong></li>
+                <li><strong>Quelle formation j’ai suivie.</strong></li>
+                <li><strong>Ce que j’ai appris.</strong></li>
+                <li><strong>Ce que je sais faire.</strong></li>
+                <li><strong>Ce que je recherche.</strong></li>
+            </ul>
+
+            <div class="quote-box">
+                <h4 style="color: var(--secondary-color); margin-bottom: 0.5rem; font-style: normal;">Exemple de présentation</h4>
+                <p style="font-size: 1.2rem; margin-bottom: 0;">
+                    “Je suis titulaire du TP Électricien d’équipement du bâtiment. J’ai appris à réaliser des installations électriques, à raccorder des équipements et à travailler dans le respect des règles de sécurité. Je suis sérieux, appliqué et j’aime le travail concret sur chantier. Aujourd’hui, je recherche un poste qui me permette de continuer à apprendre et de m’intégrer dans une équipe.”
+                </p>
+            </div>
+            
+            <div class="trainer-box" style="background-color: #f1f5f9; border-left: 5px solid var(--secondary-color); color: var(--text-dark);">
+                <h3 style="color: var(--secondary-color);">Conseil d'entraînement</h3>
+                <p style="margin-bottom:0">Entraînez-vous à dire ce texte à voix haute. Demandez à un proche de vous écouter et d'évaluer la clarté, la fluidité, la confiance et le contenu de votre message.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.6 ADAPTER AU RECRUTEUR -->
+    <section id="adapte" style="background-color: #fff;">
+        <div class="container">
+            <h2>6. Adapter son discours au recruteur</h2>
+            <p>Un même profil peut être présenté différemment selon l'entreprise ciblée. Vous ne racontez pas seulement votre parcours : vous répondez à un besoin précis.</p>
+
+            <div class="grid-3">
+                <div class="card" style="border-left-color: #10b981;">
+                    <h3 style="margin-top:0;">Entreprise artisanale</h3>
+                    <p>Insistez sur :</p>
+                    <ul style="list-style-type: disc; padding-left: 1.2rem;">
+                        <li>La polyvalence.</li>
+                        <li>La proximité.</li>
+                        <li>L'adaptation.</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-left-color: #3b82f6;">
+                    <h3 style="margin-top:0;">Grande entreprise</h3>
+                    <p>Insistez sur :</p>
+                    <ul style="list-style-type: disc; padding-left: 1.2rem;">
+                        <li>La rigueur.</li>
+                        <li>Les procédures.</li>
+                        <li>L'organisation.</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-left-color: #f59e0b;">
+                    <h3 style="margin-top:0;">Rénovation / Dépannage</h3>
+                    <p>Insistez sur :</p>
+                    <ul style="list-style-type: disc; padding-left: 1.2rem;">
+                        <li>La réactivité.</li>
+                        <li>Le contact.</li>
+                        <li>L'autonomie.</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem; font-weight: bold; color: var(--primary-color);">
+                Le lien avec le poste doit être visible dans votre discours. C'est ce qui rend votre profil crédible.
+            </p>
+        </div>
+    </section>
+
+    <!-- MISE EN PRATIQUE (Remplace Entraînement) -->
+    <section id="entrainement" style="background-color: #e2e8f0;">
+        <div class="container">
+            <h2>Mise en pratique</h2>
+            <p>À partir de votre parcours et des questions ci-dessous, construisez vos propres éléments.</p>
+
+            <!-- Exercice 1 -->
+            <div class="card" style="background: white; border-top: 5px solid var(--secondary-color);">
+                <h3 style="margin-top:0;">Exercice 1 : Mes compétences</h3>
+                <p>Identifiez ce que vous savez faire seul, ce que vous faites avec aide, et ce qui reste à apprendre.</p>
+                
+                <div class="competence-grid">
+                    <div class="competence-col">
+                        <h4>Je sais faire seul</h4>
+                        <div class="lines-spacer">_ _ _ _</div>
+                    </div>
+                    <div class="competence-col" style="border-top-color: #f59e0b;">
+                        <h4>Avec aide</h4>
+                        <div class="lines-spacer">_ _ _ _</div>
+                    </div>
+                    <div class="competence-col" style="border-top-color: #94a3b8;">
+                        <h4>À apprendre</h4>
+                        <div class="lines-spacer">_ _ _ _</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exercice 2 -->
+            <div class="card" style="background: white; border-top: 5px solid var(--secondary-color);">
+                <h3 style="margin-top:0;">Exercice 2 : Reformulation professionnelle</h3>
+                <p>Transformez ces phrases simples en langage professionnel.</p>
+                
+                <ul class="reform-list">
+                    <li>“J’ai mis des fils.” <span>➜ ?</span></li>
+                    <li>“J’ai aidé sur un chantier.” <span>➜ ?</span></li>
+                    <li>“J’ai fait des prises.” <span>➜ ?</span></li>
+                    <li>“J’ai travaillé avec un collègue.” <span>➜ ?</span></li>
+                </ul>
+            </div>
+
+            <!-- Exercice 3 -->
+            <div class="card" style="background: white; border-top: 5px solid var(--secondary-color);">
+                <h3 style="margin-top:0;">Exercice 3 : Preuves concrètes</h3>
+                <p>Listez les éléments que vous avez en votre possession pour prouver vos compétences :</p>
+                <ul style="list-style-type: disc; padding-left: 1.5rem;">
+                    <li>Attestation de stage : OUI / NON</li>
+                    <li>Certificat de formation : OUI / NON</li>
+                    <li>Photo de réalisation (si autorisée) : OUI / NON</li>
+                    <li>Habilitation électrique : OUI / NON</li>
+                    <li>Appréciation de stage : OUI / NON</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SYNTHESE -->
+    <footer id="synthese" class="section synthese" style="background-color: var(--primary-color); color: white;">
+        <div class="container">
+            <h2>À retenir</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <ul style="list-style-type: none;">
+                        <li style="margin-bottom: 1rem; font-size: 1.2rem;">✓ Mon profil doit être lisible rapidement.</li>
+                        <li style="margin-bottom: 1rem; font-size: 1.2rem;">✓ Je dois parler de ce que je sais faire, pas seulement de ce que j’ai fait.</li>
+                        <li style="margin-bottom: 1rem; font-size: 1.2rem;">✓ Chaque expérience peut devenir un atout si elle est bien formulée.</li>
+                        <li style="margin-bottom: 1rem; font-size: 1.2rem;">✓ Le recruteur doit comprendre en quelques secondes pourquoi je peux lui être utile.</li>
+                    </ul>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">
+                        <p style="font-size: 1.5rem; text-align: center; margin: 0;">
+                            “La confiance naît de la compétence... et de la capacité à l'exprimer.”
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script simple pour le suivi de la navigation active -->
+    <script>
+        const sections = document.querySelectorAll('section, header, footer');
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('href').includes(current)) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
